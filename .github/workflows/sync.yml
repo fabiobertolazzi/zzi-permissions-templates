@@ -1,6 +1,5 @@
 name: uploadToS3
 
-
 on:
   push:
     branches: [ "main" ]
