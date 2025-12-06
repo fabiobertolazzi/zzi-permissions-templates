@@ -1,1 +1,35 @@
-#teste
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "Criação da Role templateZZI com permissões administrativas para uso pelo CloudFormation"
+
+Resources:
+  TemplateZZIRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: templateZZI
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - cloudformation.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+      Policies:
+        - PolicyName: templateZZI-AdminAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: "*"
+                Resource: "*"
+
+Outputs:
+  RoleName:
+    Description: Nome da role criada
+    Value: !Ref TemplateZZIRole
+
+  RoleArn:
+    Description: ARN da role criada
+    Value: !GetAtt TemplateZZIRole.Arn
